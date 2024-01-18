@@ -4,32 +4,40 @@ journalists =  ["@jcunniet","@PaulLampon","@Aziliz31","@ssoumier","@marionsouzea
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
-puts journalists.length
+
+puts "Il y a #{journalists.length} journalistes dans l'array"
 
 #QUel est le handle le plus court de cette liste ?
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
-puts journalists.min{|word,worrd| word.size <=> worrd.size}
+
+result = journalists.min{|word,worrd| word.size <=> worrd.size}
+puts " le handle le plus court de cette liste est : #{result}"
 
 #Combien y-a-t'il de handle contenant 5 caractères (le @ ne compte pas pour un caractère)
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
 result = journalists.count {|name| name.delete("@").length == 5}
-puts result
+puts "Il y a #{result} handle contenant 5 caractères (sans @)"
 
 #Combien commencent par une majuscule (première lettre juste après le @) ?
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
 result = journalists.count {|letter| letter[1].match?(/[[:upper:]]/)}
-puts result
+puts " Il y a #{result} handle qui commencent pas une majuscule"
 
 #Trie la liste de handle par ordre alphabétique.
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
+puts "Voici la liste des handle par ordre alphabétique"
+
 puts journalists.sort.inspect
 
 
@@ -37,29 +45,36 @@ puts journalists.sort.inspect
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
 result = journalists.sort_by {|s| s.size}
+puts "Voici la liste des handle par taille"
+
 puts result.inspect
 
 #Quelle est la position dans l'array de la personne @epenser ?
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
-puts journalists.index("@epenser")
-puts journalists[373]
+
+puts " @epenser est à la position : #{journalists.index("@epenser")}"
+
 
 #Sors-moi une répartition des handle par taille de ces derniers (nombre de handle avec 1 caractère, nombre de handle avec 2 caractères, nombre de handle avec 3 caractères, etc)
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
-# result = journalists.group_by {|name| name.length}
-# puts result
+
+# définition du nb d'itérations pour la boucle for
 letter_min = journalists.min_by{|value| value.length}.length
 letter_max = journalists.max_by{|value| value.length}.length
 
+# création du hash
 element_size = {}
 
+# boucle for où letter_nb(itération) -- je veux incrémenter dans mon hash le nb de lettres -1 (moins le @) = éléments du tableau où nb lettres correspond aux éléments ! En gros le nombre de lettres est représenté par les itérations (key) et les valeurs sont le nb de mots qui ont ce nb de lettres
 for letter_nb in (letter_min..letter_max) do
   element_size[letter_nb - 1] = journalists.count{|element| letter_nb == element.length}
 end
+puts "Voici la répartition des handle par nombre de lettres composant leur handle"
 
 puts element_size.inspect

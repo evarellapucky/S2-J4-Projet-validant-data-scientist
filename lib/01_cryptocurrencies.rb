@@ -14,25 +14,43 @@ my_hash = Hash[nom_devise.zip(prix)]
 
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
-result = my_hash.max_by {|key, value| value}
-puts result
+
+sorting =  my_hash.sort_by{|key, value| value}.reverse
+max_value = sorting[0][1]
+result = sorting.select{|key, value| value == max_value}
+
+puts "Les plus grandes valeurs sont #{result}"
+
+
 
  #La ou les crypto qui ont la plus petite valeur.
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
- result = my_hash.min_by {|key, value| value}
- puts result
+
+sorting = my_hash.sort_by {|key, value| value}
+min_value = sorting[0][1]
+result = sorting.select {|key, value| value == min_value}
+
+puts "Les plus petites valeurs sont #{result}"
+
+
 
  #Les devises dont le cours est inférieur à 6000
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
  result = my_hash.select {|key, value| value < 6000}
- puts result.length
+
+ puts "Il y a #{result.length} résultats que voici :"
+
+ puts result
 
 
  #La devise la plus chère parmi celles dont le cours est inférieur à 6000.
 puts "_____________________________________________________________"
 puts "_____________________________________________________________"
+
  price_u = my_hash.select {|key, value| value < 6000}
  result = price_u.max_by {|key, value| value}
- puts result
+
+ puts "Voici la devise la plus chère parmi celles dont le cours est inférieur à 6000 :  #{result}"
