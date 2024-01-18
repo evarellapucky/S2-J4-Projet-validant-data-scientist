@@ -6,7 +6,7 @@ nom_devise =  ["Bitcoin", "Ethereum", "XRP", "Bitcoin Cash", "EOS", "Litecoin", 
 
 
 # my_hash =
-prix = prix.map(&:to_f)
+prix = prix.map{|value| value.to_f}
 my_hash = Hash[nom_devise.zip(prix)]
 
 
